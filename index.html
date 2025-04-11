@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Tracking Link Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="title">Location Tracking Link Generator</h1>
+      <p class="subtitle">Create trackable links that capture visitor locations</p>
+    </header>
+
+    <main class="main-content">
+      <section class="link-creation">
+        <div class="card">
+          <h2><i class="fas fa-link"></i> Create New Tracking Link</h2>
+          <div class="form-group">
+            <label for="target-url">Destination URL</label>
+            <input type="url" id="target-url" placeholder="https://example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="link-name">Link Name (Optional)</label>
+            <input type="text" id="link-name" placeholder="My Marketing Campaign">
+          </div>
+          <button id="generate-btn" class="btn btn-primary">
+            <i class="fas fa-magic"></i> Generate Tracking Link
+          </button>
+        </div>
+      </section>
+
+      <section class="generated-link" id="generated-link-section" style="display: none;">
+        <div class="card">
+          <h2><i class="fas fa-check-circle"></i> Your Tracking Link</h2>
+          <div class="link-display">
+            <input type="text" id="tracking-link" readonly>
+            <button id="copy-link" class="btn btn-secondary">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </div>
+          <p class="info-text">Share this link to track when and where it's opened</p>
+        </div>
+      </section>
+
+      <section class="tracking-results">
+        <div class="card">
+          <h2><i class="fas fa-map-marked-alt"></i> Tracking Results</h2>
+          <div class="filter-controls">
+            <select id="link-filter" class="form-control">
+              <option value="all">All Links</option>
+            </select>
+          </div>
+          <div class="results-container">
+            <div id="no-results" class="empty-state">
+              <i class="fas fa-binoculars"></i>
+              <p>No tracking data yet. Generate and share a link to see results.</p>
+            </div>
+            <table id="results-table" class="results-table">
+              <thead>
+                <tr>
+                  <th>Link Name</th>
+                  <th>Destination</th>
+                  <th>Clicks</th>
+                  <th>Last Click</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="results-body">
+                <!-- Results will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="modal-title">Link Details</h3>
+        <div id="modal-body">
+          <!-- Modal content will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
